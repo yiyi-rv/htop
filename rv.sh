@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 json_out=`pwd`/errors.json
 report_out=`pwd`/report
 rm -rf $json_out
