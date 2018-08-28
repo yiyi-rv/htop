@@ -20,8 +20,8 @@ matrix:
       compiler: clang
       env: TOOLKIT=true
 script: |
-  if [[ ! $TOOLKIT ]]; then 
-    ./autogen.sh && ./configure && make
+  if [[ $TOOLKIT = true ]]; then 
+    bash <(curl -s https://runtimeverification.com/toolkit/docker/bash) nightly-2018-08-27;
   else
-    bash <(curl -s https://runtimeverification.com/toolkit/docker/bash) nightly-2018-08-27
+    ./autogen.sh && ./configure && make;
   fi
