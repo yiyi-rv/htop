@@ -8,4 +8,20 @@ os:
   - linux
   - osx
 
-script: ./autogen.sh && ./configure && make
+env:
+  - TOOLKIT=true
+  - TOOLKIT=false
+
+matrix:
+  exclude:
+    - os: osx
+      env: TOOLKIT=true
+    - os: linux
+      compiler: clang
+      env: TOOLKIT=true
+script: |
+  if [[ ! $TOOLKIT ]]; then 
+    ./autogen.sh && ./configure && make
+  else
+    bash <(curl -s https://runtimeverification.com/toolkit/docker/bash) nightly-2018-08-27
+  fi
